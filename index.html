@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic | Tocode.ru</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <div>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.0.0-beta.3/babel.min.js"
+        crossorigin
+      ></script>
+      <script
+        src="https://unpkg.com/react@17/umd/react.development.js"
+        crossorigin
+      ></script>
+      <script
+        src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+        crossorigin
+      ></script>
+    </div>
+
+    <!-- Load our React component -->
+    <script type="text/babel">
+     const Question = ({quest, answ}) => {
+      const [show, setShow] = React.useState(false)
+        return (
+          <div>
+            { show ? (
+              <div>
+                <p> Вопрос: {quest}</p>
+                <p dangerouslySetInnerHTML={{__html: answ}} />
+                <Button title='закрыть ответ' clickBtn={() => setShow(!show)} />
+              </div>
+            ) : (
+              <div>
+                <p> Вопрос: {quest}</p>
+                <Button title='смотреть ответ' clickBtn={() => setShow(!show)} />
+              </div>
+            )
+              }
+          </div>
+        )
+     }
+
+      const Button = ({title, clickBtn}) => {
+        return <button onClick={clickBtn}>{title}</button>
+      }
+
+     const App = () => {
+      const arr = [
+          {
+            title: 'Duis lobortis, velit vitae tristique?',
+            body: 'Etiam viverra sed lorem vitae finibus. Nullam ac tincidunt ante, quis hendrerit odio. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse convallis in nisi eget rutrum. Etiam efficitur, erat sed ultrices eleifend, elit purus interdum dolor, ac vehicula.',
+          },
+          {
+            title: 'Aenean nec dui scelerisque?',
+            body: 'Fusce congue eros accumsan, pulvinar erat quis, pharetra felis. Vestibulum non turpis euismod, vulputate nisl non, elementum nulla. Proin eget enim neque. Proin vehicula faucibus nisl. Donec tincidunt neque turpis, sed bibendum nunc accumsan et. Aenean nec dui scelerisque, congue orci ac, scelerisque diam. Phasellus consectetur fringilla condimentum.',
+          },
+          {
+            title: 'Nullam ac tincidunt ante?',
+            body: 'Phasellus gravida maximus metus, et consequat nulla aliquam eu. <br /><img src="https://toppng.com/uploads/preview/react-logo-icon-11609374122d9vkbptqap.png" alt="react"/><br /><br />Suspendisse nec dolor scelerisque tellus aliquet hendrerit. Vestibulum sed tempus nunc. Mauris at efficitur orci, eget vehicula urna. Aliquam blandit elit ut nunc congue, eget iaculis sem tempor.',
+          },
+          {
+            title: 'Etiam vestibulum congue. Suspendisse eu interdum diam?',
+            body: 'Vestibulum sed tempus nunc. Mauris at efficitur orci, eget vehicula urna. Aliquam blandit elit ut nunc congue, eget iaculis sem tempor. Suspendisse sit amet suscipit elit. Quisque tincidunt ante ac mauris tristique hendrerit. Proin mollis lectus et nisl dignissim ullamcorper.',
+          },
+        ]
+      return (
+        <React.Fragment>
+          {arr.map((item, ind) => <Question key={ind} quest={item.title} answ={item.body} /> )}
+        </React.Fragment>
+      )
+    }
+     ReactDOM.render(<App />, document.querySelector("#app") )
+    </script>
+  </body>
+</html>
